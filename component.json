@@ -27,5 +27,13 @@
       "app-test",
       "APP_TEST_PACKAGE=hyper-block"
     ]
-  ]
+  ],
+  "cargo_context": {
+    "Cargo.toml": {
+      "workspace": null,
+      "membership": "../../app",
+      "dependency_paths": {},
+      "inherited_dependencies": {}
+    }
+  }
 }
