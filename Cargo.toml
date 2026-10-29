@@ -1,13 +1,17 @@
 # SPDX-FileCopyrightText: 2026 roolrz
 # SPDX-License-Identifier: Apache-2.0
 
+
 [package]
 name = "hyper-block"
 version = "0.0.0"
 edition = "2024"
 license = "Apache-2.0"
-repository = "https://github.com/HypeR-Proj/block"
+repository = "https://github.com/HypeR-Proj/lib-block"
 publish = false
+workspace = "../../app"
+
+[lints]
 
 [lints.clippy]
 doc_markdown = "deny"
@@ -26,12 +30,4 @@ unsafe_op_in_unsafe_fn = "deny"
 
 [lints.rust.unexpected_cfgs]
 level = "warn"
-check-cfg = [
-    "cfg(target_os, values(\"hyper\"))",
-]
-
-[workspace]
-members = [
-    ".",
-]
-resolver = "3"
+check-cfg = ["cfg(target_os, values(\"hyper\"))"]
