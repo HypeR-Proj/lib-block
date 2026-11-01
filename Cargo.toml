@@ -4,12 +4,11 @@
 
 [package]
 name = "hyper-block"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2024"
 license = "Apache-2.0"
 repository = "https://github.com/HypeR-Proj/lib-block"
 publish = false
-workspace = "../../app"
 
 [lints]
 
@@ -31,3 +30,19 @@ unsafe_op_in_unsafe_fn = "deny"
 [lints.rust.unexpected_cfgs]
 level = "warn"
 check-cfg = ["cfg(target_os, values(\"hyper\"))"]
+
+[workspace]
+resolver = "3"
+members = []
+
+[profile]
+
+[profile.release]
+codegen-units = 1
+debug = 1
+incremental = false
+lto = "fat"
+opt-level = "s"
+overflow-checks = true
+panic = "abort"
+strip = "none"
