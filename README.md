@@ -5,16 +5,32 @@ SPDX-License-Identifier: Apache-2.0
 
 # lib-block
 
-A HypeR component. See [HypeR](https://github.com/HypeR-Proj/HypeR) for
-workspace setup and the installed SDK build boundary.
+Bounded userspace partition discovery.
 
-## Workspace tests
+The GPT parser is independent of the transport and filesystem implementation. A consumer
+supplies block reads and receives validated partition geometry for subsequent authority-
+scoped deployment.
 
-Use the [HypeR workspace](https://github.com/HypeR-Proj/HypeR) to resolve dependencies:
+See the [implementation entry](src/gpt.rs) and [component declaration](component.json)
+for the public interfaces, build dependencies and delivered artifacts.
+
+## Boundaries
+
+This library neither mounts filesystems nor submits I/O VM requests itself. Its bounds
+and validation errors must be handled before constructing a partition-backed device.
+
+## Build and test
+
+Use this checkout inside the [repo-managed workspace](https://github.com/HypeR-Proj/HypeR).
+From this repository directory:
 
 ```sh
-python3 project.py test lib-block
+make
+make test
 ```
 
-Paths in the documentation are relative to the repo-managed workspace root.
-Edit this repository and prepare the workspace again before building.
+An absolute `OUT=/path/to/out` selects a shared output directory. The module
+entry delegates to build/system, which prepares the installed SDK and declared
+dependencies. Native binaries require HypeR; host module checks cover the tests
+selected by component.json. A standalone clone does not contain the workspace’s
+other source repositories or Native SDK.
