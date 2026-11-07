@@ -52,13 +52,12 @@ an operation inside that queue; it is neither a global identifier nor an
 independent authority. A recycled slot cannot reinterpret an older ticket as a
 new request.
 
-The initial backend has four physical command slots and a 512 KiB data pool in
-the existing dedicated shared-memory grant. Data spans are allocated in 128 KiB
-units; one merged command can use up to four contiguous units. Large transfers
-therefore trade command concurrency for a larger sequential request. Logical
-requests can also span multiple commands. Queue limits are distinct from those
-transport limits; the implementation rejects an unsupported depth instead of
-silently accepting a larger value.
+The initial backend has four physical command slots and fifteen 128 KiB data
+spans in each dedicated 2 MiB Native transport grant. One command can use up to
+four contiguous spans (512 KiB), so two full-size commands fit simultaneously;
+four full-size commands do not. Logical requests can span multiple commands.
+Queue limits are distinct from those transport limits; the implementation rejects
+an unsupported depth instead of silently accepting a larger value.
 
 ## Submission and data lifetime
 
